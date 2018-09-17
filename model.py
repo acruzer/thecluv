@@ -23,7 +23,10 @@ class User(db.Model):
     email = db.Column(db.String(64), nullable=False, unique=True)
     username = db.Column(db.String(15), nullable=False, unique=True)
     password = db.Column(db.String(64), nullable=False)
+<<<<<<< HEAD
     user_img = db.Column(db.String(), nullable=True)
+=======
+>>>>>>> 3cfcb4e0bc0ceb09c4a6a55df0f3abed321061af
     zipcode = db.Column(db.String(15), nullable=True)
 
     def __repr__(self):
@@ -50,7 +53,11 @@ class Article(db.Model):
     images = db.relationship("Image",
                              secondary="article_images",
                              backref="articles")
+<<<<<<< HEAD
     type_value = db.relationship("ArticleType")
+=======
+
+>>>>>>> 3cfcb4e0bc0ceb09c4a6a55df0f3abed321061af
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -80,8 +87,13 @@ class ArticleImage(db.Model):
     img_id = db.Column(db.ForeignKey('images.img_id'), nullable=False)
     item_id = db.Column(db.ForeignKey('articles.article_id'), nullable=False)
 
+<<<<<<< HEAD
     # image = db.relationship('Image', backref='images')
     # article = db.relationship('Article', backref='articles')
+=======
+    image = db.relationship('Image', backref='images')
+    article = db.relationship('Article', backref='articles')
+>>>>>>> 3cfcb4e0bc0ceb09c4a6a55df0f3abed321061af
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -113,7 +125,11 @@ class Loan(db.Model):
     return_date = db.Column(db.DateTime, nullable=True)
 
     borrower = db.relationship('User', backref='loans')
+<<<<<<< HEAD
     article = db.relationship('Article', backref='loans')
+=======
+    article = db.relationship('Article', backref='articles')
+>>>>>>> 3cfcb4e0bc0ceb09c4a6a55df0f3abed321061af
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -129,8 +145,13 @@ class PreviousOwner(db.Model):
     item_id = db.Column(db.ForeignKey('articles.article_id'), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False)
 
+<<<<<<< HEAD
     user = db.relationship('User', backref='previous_owners')
     article = db.relationship('Article', backref='previous_owners')
+=======
+    user = db.relationship('User', backref='users')
+    article = db.relationship('Article', backref='articles')
+>>>>>>> 3cfcb4e0bc0ceb09c4a6a55df0f3abed321061af
 
     def __repr__(self):
         """Provide helpful representation when printed."""
