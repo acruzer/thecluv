@@ -1,0 +1,4 @@
+3|2|S|Green|Cotton|Brand New|F|T|F
+2|1|S|Yellow|Cotton|Brand New|F|T|F
+1|3|M|Purple|Polyester|It has a hole on the sleeve|F|F|T
+1|2|M|Orange|Faux Leather|Almost new|T|F|F
