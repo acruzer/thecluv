@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>The Cluv</title>
+</head>
+
+<body>
+<div>  The Cluv </div>
+<div id="sidebar">
+	<span id="loginlogout"><a href="/login">Login</a> </span>  
+
+	<span id="logout"><a href="/logout">Log out</a> </span>
+
+</div>
+
+<hr>
+
+  	{% for msg in get_flashed_messages() %}
+    	<p class=flashes>
+    	{{ msg }}
+		</p>
+  	{% endfor %}
+
+
+  {% block content %} put your content here {% endblock %}
+
+</body>
+</html>

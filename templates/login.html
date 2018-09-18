@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> LOGIN </h2>
+
+<form action='/login_confirm' method="GET" name='login'>
+<table>
+	<tr>
+		<td>Email</td>
+		<td> <input type="textbox" name="email"></td></tr>
+	<tr>
+		<td>Password</td>
+		<td><input type="textbox" name="password"></td>
+	</tr>
+</table>
+	
+	<input type="submit" value="login">
+</form>
+
+<button><a href="/register">New User?</a></button>
+
+
+{% endblock %}

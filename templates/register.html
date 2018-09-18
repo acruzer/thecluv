@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> Register </h2>
+
+<form action="/register_confirm" method="POST" name="register">
+<table>
+	<tr>
+    	<td>First Name</td>
+    	<td> <input type="fname" 
+    			name="fname" 
+    			required>
+    	</td>
+	</tr>
+
+	<tr>
+    	<td>Last Name</td>
+    	<td> <input type="lname" 
+    				name="lname" 
+    				required>
+    	</td>
+	</tr>
+
+	<tr>
+    	<td>Zipcode</td>
+    	<td> <input type="zipcode" 
+    				name="zipcode" 
+    				required>
+    	</td>
+	</tr>
+
+	<tr>
+    	<td>Username</td>
+    	<td> <input type="username" 
+    				name="username" 
+    				required>
+    	</td>
+	</tr>
+
+	<tr>
+    	<td>Email</td>
+    	<td> <input type="email" 
+    				name="email" 
+    				required>
+    	</td>
+	
+	</tr>
+
+		<tr>
+    	<td>Image</td>
+    	<td> <input type="url" 
+    				name="user_img">
+    	</td>
+	</tr>
+	
+	<tr>
+    	<td>Password</td>
+    	<td> <input type="password" 
+    				name="password" 
+    				required>
+    	</td>
+	</tr>
+
+	<tr>
+    	<td>Confirm Password</td>
+    	<td> <input type="password" 
+    				name="password_2" 
+    				required>
+    	</td>
+	</tr>
+</table>
+  
+  <input type="submit" value="Register">
+</form>
+
+
+
+{% endblock %}

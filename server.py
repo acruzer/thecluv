@@ -29,8 +29,53 @@ def index():
 @app.route('/profile/<user_id>')
 def profile():
   """User profile page."""
-  return render_template("profile")
+  return render_template("profile.html")
 
+@app.route("/register")
+def register():
+    return render_template("register.html")
+
+@app.route("/register_confirm", methods = ['POST'])
+def register_confirm():
+
+    fname=request.form.get("fname")
+    lname=request.form.get("lname")
+    new_username=request.form.get("username")
+    user_img=request.form.get("user_img")
+    new_email=request.form.get("email")
+    password=request.form.get("password")
+    password_2=request.form.get("password_2")
+    zipcode=request.form.get("zipcode")
+    print(user_img)
+    #check of user entered a image url, if not set default
+    if user_img == "":
+        user_img = "https://t4.ftcdn.net/jpg/00/97/00/07/160_F_97000700_0UiUzwGrOuZuNRBSuH3aZMB5w1j9K0iA.jpg"
+
+    if password_2 != password:
+        return redirect('/register')
+    #check if email in Users
+    if User.query.filter_by(email=new_email).first():
+        return redirect('/register')
+    if User.query.filter_by(username=new_username).first():
+        return redirect('/register')
+    else:   
+        pwd = request.form.get('password')
+        user = User(
+                fname=fname,
+                lname=lname,
+                username=new_username,
+                user_img=user_img,
+                email=new_email,
+                password=pwd,
+                zipcode=zipcode
+                )
+        db.session.add(user)
+        db.session.commit()
+
+        # print("user id is: ",user_id)
+        print(user)
+    return render_template('index.html',
+                            username=new_username)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
