@@ -156,7 +156,7 @@ if __name__ == "__main__":
     from server import app
     connect_to_db(app)
     print("Connected to DB.")
-    db.create_all()
+    
 # def init_app():
 #     # So that we can use Flask-SQLAlchemy, we'll make a Flask app.
 #     from flask import Flask

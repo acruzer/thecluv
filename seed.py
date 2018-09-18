@@ -140,4 +140,4 @@ if __name__ == "__main__":
     load_users()
     load_types()
     load_articles()
-    # set_val_user_id()
+    set_val_user_id()
