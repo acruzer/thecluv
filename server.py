@@ -24,14 +24,41 @@ app.jinja_env.undefined = StrictUndefined
 @app.route('/')
 def index():
     """Homepage."""
-    return render_template("index.html")
+    #check if user is on the session
+    if session.get("current_user"):
+        return redirect('/my_closet')
+    else:
+        return render_template("login.html")
+
+@app.route('/my_closet')
+def closet():
+    #query articles by session user id
+    return render_template("closet.html")
 
 @app.route('/profile/<user_id>')
 def profile():
   """User profile page."""
   return render_template("profile.html")
 
-@app.route("/register")
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
+@app.route("/login", methods = ['POST', 'GET'])
+def login():
+    new_username=request.form.get("username")
+    password=request.form.get("password")
+    current_user = User.query.filter_by(username=new_username).first()
+
+    if current_user:
+        if current_user.password == password:
+            session["current_user"] = current_user.user_id
+            return redirect('/my_closet')
+    #flash message here
+    return render_template("login.html")
+
+@app.route("/register", methods = ['POST'])
 def register():
     return render_template("register.html")
 

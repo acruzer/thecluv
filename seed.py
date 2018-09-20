@@ -13,6 +13,7 @@ from model import PreviousOwner
 from model import connect_to_db, db
 from server import app
 
+
 import datetime
 
 

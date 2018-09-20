@@ -2,20 +2,19 @@
 {% block content %}
 <h2> LOGIN </h2>
 
-<form action='/login_confirm' method="GET" name='login'>
+<form action='/login' method="POST" name='login'>
 <table>
-	<tr>
-		<td>Email</td>
-		<td> <input type="textbox" name="email"></td></tr>
-	<tr>
-		<td>Password</td>
-		<td><input type="textbox" name="password"></td>
-	</tr>
+  <tr>
+    <td>Username</td>
+    <td> <input type="username" name="username"></td></tr>
+  <tr>
+    <td>Password</td>
+    <td><input type="password" name="password"></td>
+  </tr>
 </table>
-	
-	<input type="submit" value="login">
+  
+  <input type="submit" value="login">
 </form>
-
 <button><a href="/register">New User?</a></button>
 
 
