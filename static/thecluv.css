@@ -2,3 +2,23 @@
     font-size: 2.5rem;
     margin: 15px;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #011627;
+    border-color: #011627;
+}
+
+.btn-primary:hover {
+	background-color: #182B3A;
+	border-color: #182B3A;
+}
+
+.h2, h2 {
+    text-align: center;
+}
+
+@media (min-width: 992px)
+.container {
+	max-width: 720px;
+}

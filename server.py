@@ -7,7 +7,7 @@ from flask import (Flask, render_template, redirect, request, flash,
 
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import User, connect_to_db, db
+from model import User, ArticleType, connect_to_db, db
 
 
 app = Flask(__name__)
@@ -103,6 +103,15 @@ def register_confirm():
         print(user)
     return render_template('index.html',
                             username=new_username)
+
+@app.route("/article_add", methods = ['GET'])
+def article_add():
+    article_type = ArticleType.query.all()
+    return render_template("article_add.html", article_type=article_type)
+
+@app.route("/article_add_confirm", methods = ['POST'])
+def article_add_confirm():
+    pass
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
