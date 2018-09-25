@@ -13,10 +13,10 @@
 
 </head>
 <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="/">
 	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgyZgRZEIdY4flzsu7Q9ovPsgjGi7tsKrRFC5G_vwNmK7qO3p5" width="30" height="30" class="d-inline-block align-top" alt="">
   </a>
-  <a class="navbar-brand" href="#">  The Cluv </a>
+  <a class="navbar-brand" href="/">  The Cluv </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -27,16 +27,19 @@
         <a class="nav-link" href="/my_closet">My Closet <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="/my_closet">Closets</a>
+      </li>
+      	{% if session.get("current_user") %}
+      <li class="nav-item">
+      	<a class="nav-link disabled" href="/profile">Profile</a>
       </li>
       <li class="nav-item">
-      	{% if session.get("current_user") %}
         <a class="nav-link disabled" href="/logout">Log out</a>
 		{% else %}
 		<a class="nav-link disabled" href="/login">Login</a>  
-		{% endif %}
 		</a>
       </li>
+		{% endif %}
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search">

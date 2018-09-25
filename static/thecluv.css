@@ -18,7 +18,16 @@
     text-align: center;
 }
 
-@media (min-width: 992px)
-.container {
+div.container {
 	max-width: 720px;
+}
+
+input.btn-primary {
+	width: 150px;
+  	text-align: center;
+  	margin:0 auto;
+}
+
+input {
+	text-align: center;
 }
