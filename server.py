@@ -9,6 +9,13 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, ArticleType, connect_to_db, db
 
+import boto3, botocore
+import os
+import uuid
+
+S3_KEY = "TEMP"
+S3_SECRET = "TEMP"
+S3_BUCKET = "thecluv"
 
 app = Flask(__name__)
 
@@ -111,7 +118,46 @@ def article_add():
 
 @app.route("/article_add_confirm", methods = ['POST'])
 def article_add_confirm():
-    pass
+    user_id = session["current_user"]
+    type_id=request.form.get("type_id")
+    image_file=request.files["image"]
+    #check if images are there
+    # image_2=request.form.get("image_2")
+    # image_3=request.form.get("image_3")
+    size=request.form.get("size")
+
+    # article = Article (
+    #             owner_id=user_id,
+    #             type_id=type_id,
+    #             )
+    # db.session.add(article)
+    # db.session.flush()
+    # article.article_id
+
+
+    # image = Image (
+    #             article_id=article.article_id
+    #             )
+    upload_to_s3(image_file)
+
+def upload_to_s3(image):
+    s3 = boto3.client("s3",
+        aws_access_key_id=S3_KEY,
+        aws_secret_access_key=S3_SECRET)
+
+    unused_filename, file_extension = os.path.splitext(image.filename)
+        
+    filename = str(uuid.uuid1()) + file_extension
+
+    reponce = s3.upload_fileobj(image,
+            S3_BUCKET,
+            filename,
+            ExtraArgs={
+                "ACL": "public-read",
+                "ContentType": image.content_type
+                }
+            )
+    print ("https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename))
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

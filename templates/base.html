@@ -12,6 +12,7 @@
 	<link href="static/thecluv.css" rel="stylesheet">
 
 </head>
+<body>
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
 	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgyZgRZEIdY4flzsu7Q9ovPsgjGi7tsKrRFC5G_vwNmK7qO3p5" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -48,9 +49,9 @@
   </div>
 </nav>
 
-<body>
 
 <hr>
+<div class="container">
 
   	{% for msg in get_flashed_messages() %}
     	<p class=flashes>
@@ -60,6 +61,12 @@
 
 
   {% block content %} put your content here {% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+<!-- Bootstrap Js CDN -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </body>
 </html>
