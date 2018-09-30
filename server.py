@@ -13,8 +13,8 @@ import boto3, botocore
 import os
 import uuid
 
-S3_KEY = "TEMP"
-S3_SECRET = "TEMP"
+S3_KEY = os.environ["S3_KEY"]
+S3_SECRET = os.environ["S3_SECRET"]
 S3_BUCKET = "thecluv"
 
 app = Flask(__name__)
@@ -147,7 +147,7 @@ def upload_to_s3(image):
 
     unused_filename, file_extension = os.path.splitext(image.filename)
         
-    filename = str(uuid.uuid1()) + file_extension
+    filename = str(uuid.uuid4()) + file_extension
 
     reponce = s3.upload_fileobj(image,
             S3_BUCKET,
