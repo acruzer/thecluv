@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2> New Article </h2>
-
 <div class="row justify-content-center">
+<div class="col-8">
 <form action="/article_add_confirm" enctype="multipart/form-data" method="POST" name="article_add">
   
 	<div class="form-group">
@@ -64,48 +64,77 @@
     		   name="notes">
 		</textarea>
 	</div>
-	<fieldset class="form-group">
-    <div class="row">
-	<legend class="col-form-label col-sm-2 pt-0">Private</legend>
-		<input type="radio" 
-    		   name="is_private"> Yes
-    	
-		<input type="radio" 
-    		   name="is_private"> No
-    </div>
-	</fieldset>
+
 
 	<div class="form-group">
-    <label for="loanable">Loanable</label>
-		<input type="radio"
-			   class="form-check-input"
-			   id="gridRadios1" 
-    		   name="is_loanable"
-    		   value="True"> Yes
-    	
-		<input type="radio"
-			   class="form-check-input"
-			   id="gridRadios1" 
-    		   name="is_loanable"
-    		   value="False"> No
+    <label for="private">Private </label>
+    	<div class="custom-control custom-radio custom-control-inline">
+      <input type="radio" 
+           id="private_yes" 
+           name="is_private" 
+           class="custom-control-input"
+           value="True"
+           checked>
+           <label class="custom-control-label" for="private_yes">Yes</label>
+		  </div>
+
+		  <div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" 
+  			   id="private_no" 
+  			   name="is_private" 
+  			   class="custom-control-input"
+  			   value="False">
+  			   <label class="custom-control-label" for="private_no">No</label>
+		  </div>
+	</div>
+	
+	<div class="form-group">
+    <label for="loanable">Loanable </label>
+    	<div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" 
+  			   id="lonable_yes" 
+  			   name="is_loanable" 
+  			   class="custom-control-input"
+  			   value="True">
+  			   <label class="custom-control-label" for="lonable_yes">Yes</label>
+		  </div>
+		
+
+		  <div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" 
+  			   id="lonable_no" 
+  			   name="is_loanable" 
+  			   class="custom-control-input"
+  			   value="False"
+           checked>
+  			   <label class="custom-control-label" for="lonable_no">No</label>
+		  </div>
 	</div>
 
 	<div class="form-group">
-    <label for="giveaway">Giveaway</label>
-		<input type="radio"
-			   class="form-check-input"
-			   id="gridRadios1" 
-    		   name="is_giveaway"
-    		   value="True"> Yes
-    	
-		<input type="radio"
-			   class="form-check-input"
-			   id="gridRadios1" 
-    		   name="is_giveaway"
-    		   value="False"> No
-    </div>
+    <label for="giveaway">Giveaway </label>
+    	<div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" 
+  			   id="giveaway_yes" 
+  			   name="is_giveaway" 
+  			   class="custom-control-input"
+  			   value="True">
+  			   <label class="custom-control-label" for="giveaway_yes">Yes</label>
+		  </div>
+
+		  <div class="custom-control custom-radio custom-control-inline">
+  		<input type="radio" 
+  			   id="giveaway_no" 
+  			   name="is_giveaway" 
+  			   class="custom-control-input"
+  			   value="False"
+           checked>
+  			   <label class="custom-control-label" for="giveaway_no">No</label>
+		  </div>
+	</div>
+
    
-    <div class="col-auto">
+    <div class="form-group">
 		<button type="submit" 
 			   class="btn btn-primary mb-2" 
 			   value="Add">Submit
@@ -113,6 +142,7 @@
     </div>
 
 </form>
+</div>
 </div>
 
 {% endblock %}

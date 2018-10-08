@@ -7,7 +7,7 @@ from flask import (Flask, render_template, redirect, request, flash,
 
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import User, ArticleType, connect_to_db, db
+from model import User, Article, Image, ArticleType, connect_to_db, db
 
 import boto3, botocore
 import os
@@ -120,25 +120,56 @@ def article_add():
 def article_add_confirm():
     user_id = session["current_user"]
     type_id=request.form.get("type_id")
-    image_file=request.files["image"]
-    #check if images are there
-    # image_2=request.form.get("image_2")
-    # image_3=request.form.get("image_3")
+    image_file_1=request.files.get("image")
+    image_file_2=request.files.get("image_2")
+    image_file_3=request.files.get("image_3")
+    image_file_4=request.files.get("image_4")
     size=request.form.get("size")
+    color=request.form.get("color")
+    material=request.form.get("material")
+    notes=request.form.get("notes")
+    is_private=request.form.get("is_private")
+    is_loanable=request.form.get("is_loanable")
+    is_giveaway=request.form.get("is_giveaway")
 
-    # article = Article (
-    #             owner_id=user_id,
-    #             type_id=type_id,
-    #             )
-    # db.session.add(article)
-    # db.session.flush()
-    # article.article_id
+    bool_convert = {"True": True, "False": False}
+    
+    article = Article(
+                owner_id=user_id,
+                type_id=type_id,
+                size=size,
+                color=color,
+                material=material,
+                notes=notes,
+                is_private=bool_convert[is_private],
+                is_loanable=bool_convert[is_loanable],
+                is_giveaway=bool_convert[is_giveaway]
+                )
 
+    #check if images are there
+    img_1 = upload_to_s3(image_file_1)
+    image = Image (img_url=img_1)
+    article.images.append(image)
+    
+    if image_file_2 != None:
+        img_2 = upload_to_s3(image_file_2)
+        image = Image (img_url=img_2)
+        article.images.append(image)
 
-    # image = Image (
-    #             article_id=article.article_id
-    #             )
-    upload_to_s3(image_file)
+    if image_file_3 != None:
+        img_3 = upload_to_s3(image_file_3)
+        image = Image (img_url=img_3)
+        article.images.append(image)
+
+    if image_file_4 != None:
+        img_4 = upload_to_s3(image_file_4)
+        image = Image (img_url=img_4)
+        article.images.append(image)
+
+    
+    db.session.add(article)
+    db.session.commit()
+    return redirect('/my_closet')
 
 def upload_to_s3(image):
     s3 = boto3.client("s3",
@@ -157,7 +188,7 @@ def upload_to_s3(image):
                 "ContentType": image.content_type
                 }
             )
-    print ("https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename))
+    return "https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
