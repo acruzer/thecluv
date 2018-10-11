@@ -68,7 +68,7 @@ class Image(db.Model):
 
     def __repr__(self):
         """Provide helpful representation when printed."""
-        return f"<Article article_id={self.article_id} type_id={self.type_id}>"
+        return f"<Image img_id={self.img_id} img_url={self.img_url}>"
 
 class ArticleImage(db.Model):
     """Images and articles connection"""

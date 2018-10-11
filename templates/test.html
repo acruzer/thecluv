@@ -66,4 +66,75 @@
 
 </body>
 
-</html>   
+</html>  
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+<h1> Closet </h1>
+
+<!-- <a href="/article_add">New Article</a> -->
+
+<div class="row">
+  <div class="col-md-2">
+    <ul class="nav flex-column">
+  <li class="nav-item">
+    <a class="nav-link active" href="/article_add">New Article</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
+</div>
+
+<div class="col-md-9">
+
+<div class="row">
+
+<!-- for article in request  -->
+  <div class="col-md-4">
+    <a href="https://s3-us-west-1.amazonaws.com/thecluv/078dc731-edf3-483c-b0cd-8c79c60da451.png"><img src="https://s3-us-west-1.amazonaws.com/thecluv/078dc731-edf3-483c-b0cd-8c79c60da451.png" alt="Dress" style="width:100%">Hello</a>
+  </div>
+  <div class="col-md-4">
+    <img src="https://static01.nyt.com/images/2018/09/01/science/01TB-CATS/merlin_142294395_c2acf4d4-3e4a-4e31-a497-690116229738-articleLarge.jpg?quality=90&auto=webp" alt="Forest" style="width:100%">
+  </div>
+  <div class="col-md-4">
+    <img src="https://r.hswstatic.com/w_907/gif/tesla-cat.jpg" alt="Mountains" style="width:100%">
+  </div>
+
+  <div class="col-md-4">
+    <a href="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350"><img src="https://images.pexels.com/photos/20787/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350" alt="Snow" style="width:100%">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></a>
+  </div>
+  <div class="col-md-4">
+    <img src="https://static01.nyt.com/images/2018/09/01/science/01TB-CATS/merlin_142294395_c2acf4d4-3e4a-4e31-a497-690116229738-articleLarge.jpg?quality=90&auto=webp" alt="Forest" style="width:100%">
+  </div>
+  <div class="col-md-4">
+    <img src="https://r.hswstatic.com/w_907/gif/tesla-cat.jpg" alt="Mountains" style="width:100%">
+  </div>
+</div>
+
+</div>
+</div>
+
+
+<!-- jQuery CDN -->
+
+<!-- jQuery CDN -->
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+<!-- Bootstrap Js CDN -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+{% endblock %} 

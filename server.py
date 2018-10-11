@@ -40,7 +40,17 @@ def index():
 @app.route('/my_closet')
 def closet():
     #query articles by session user id
-    return render_template("closet.html")
+    current_user = session.get("current_user")
+
+    user_closet = Article.query.filter_by(owner_id=current_user).all()
+
+    for item in user_closet: 
+        print(item.images)
+    
+    # print(user_closet.size)
+    # print (user_closet_img)
+
+    return render_template("closet.html", user_closet=user_closet)
 
 @app.route('/profile/<user_id>')
 def profile():
@@ -107,7 +117,7 @@ def register_confirm():
         db.session.commit()
 
         # print("user id is: ",user_id)
-        print(user)
+        # print(user)
     return render_template('index.html',
                             username=new_username)
 

@@ -48,3 +48,11 @@ input {
 .left-nav-bar{
 	flex: 0 0 210px;
 }
+
+
+div.item-list {
+    border: solid 1px gray;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
