@@ -52,10 +52,14 @@ def closet():
 
     return render_template("closet.html", user_closet=user_closet)
 
-@app.route('/profile/<user_id>')
+@app.route('/profile')
 def profile():
   """User profile page."""
-  return render_template("profile.html")
+  current_user = session.get("current_user")
+
+  user_info = User.query.filter_by(user_id=current_user).first()
+
+  return render_template("profile.html", user_info=user_info)
 
 @app.route('/logout')
 def logout():

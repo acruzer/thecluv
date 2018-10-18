@@ -51,8 +51,13 @@ input {
 
 
 div.item-list {
-    border: solid 1px gray;
+    /*border: solid 1px gray;*/
     margin-top: 15px;
     margin-bottom: 15px;
-    padding: 10px;
+    /*padding: 10px;*/
+}
+
+div.article-detail {
+    margin-top: 20px;
+    font-weight: lighter;
 }

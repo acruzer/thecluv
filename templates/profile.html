@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div>
+<div class="shadow p-3 mb-5 bg-white rounded">
+<img src="{{user_info.user_img}}" class="rounded mx-auto d-block" alt="{{user_info.user_img}}">
+
+
+<h1 class="text-center">{{user_info.fname}} {{user_info.lname}}</h1>
+<p class="text-center">
+<ln class="font-weight-bold">email |</ln>
+{{user_info.email}}
+<br>
+<ln class="font-weight-bold">zipcode |</ln>
+{{user_info.zipcode}}
+</p>
+</div>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1> Closet </h1>
+<h2> Closet </h2>
 
 <!-- <a href="/article_add">New Article</a> -->
 
@@ -29,16 +29,18 @@
 
 <!-- for article in request  -->
 {% for item in user_closet %}
-  
   <div class="col-md-4">
+  <div class="shadow p-3 mb-5 bg-white rounded">
     <div class="item-list">
       {% if item.images %}
     <a href="{{item.images[0].img_url}}"><img src="{{item.images[0].img_url}}" alt="Snow" style="width:100%"></a>
       {% endif %}
-    <p>{{item.type_value.name}} / {{item.size}}</p>
+    <div class="article-detail">
+    <p class="text-center">{{item.type_value.name}} / {{item.size}}</p>
+    </div>
     </div>
   </div>
-  
+  </div>
 {% endfor %}
 </div> 
 
