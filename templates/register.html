@@ -1,86 +1,83 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2> Register </h2>
-
+<div class="row justify-content-center">
+<div class="col-8">
 <div class="container">
 
-<form action="/register_confirm" method="POST" name="register">
-<table>
-	<tr>
-    	<td>First Name</td>
-    	<td> <input type="fname" 
+<form action="/register_confirm" enctype="multipart/form-data" method="POST" name="register">
+
+<div class="form-group">
+<label for="fname">First Name</label>
+         <input type="fname" 
     			name="fname"
                 class="form-control" 
     			required>
-    	</td>
-	</tr>
+</div>
 
-	<tr>
-    	<td>Last Name</td>
-    	<td> <input type="lname" 
+<div class="form-group">
+<label for="lname">Last Name</label>
+             <input type="lname" 
     				name="lname"
                     class="form-control" 
     				required>
-    	</td>
-	</tr>
+</div>
 
-	<tr>
-    	<td>Zipcode</td>
-    	<td> <input type="zipcode" 
+<div class="form-group">   	
+<label for="zipcode">Zipcode</label>
+             <input type="zipcode" 
     				name="zipcode"
                     class="form-control" 
     				required>
-    	</td>
-	</tr>
+</div>
 
-	<tr>
-    	<td>Username</td>
-    	<td> <input type="username" 
+<div class="form-group">
+<label for="username">Username</label>
+             <input type="username" 
     				name="username"
                     class="form-control" 
     				required>
-    	</td>
-	</tr>
+</div>
 
-	<tr>
-    	<td>Email</td>
-    	<td> <input type="email" 
+<div class="form-group">
+<label for="email">Email</label>
+             <input type="email" 
     				name="email"
                     class="form-control" 
     				required>
-    	</td>
-	
-	</tr>
+</div>
 
-		<tr>
-    	<td>Image</td>
-    	<td> <input type="url" 
-    				name="user_img"
-                    class="form-control">
-    	</td>
-	</tr>
-	
-	<tr>
-    	<td><label class="col-sm-2 col-form-label">Password</label></td>
-    	<td> <input type="text" 
-    				name="password" 
-                    class="form-control"
-    				required>
-    	</td>
-	</tr>
+<div class="form-group">
+    <label for="image">Image</label>
+        <input type="file"
+               name="user_img"
+               class="form-control-file">
+</div>
 
-	<tr>
-    	<td><label class="col-sm-2 col-form-label">Confirm Password</label></td>
-    	<td> <input type="password" 
+<div class="form-group">
+<label for="password">Password</label>
+        <input type="password"
+               name="password" 
+               class="form-control"
+               required>
+</div>
+
+<div class="form-group">
+<label for="conf-password">Confirm Password</label>
+             <input type="password" 
     				name="password_2"
                     class="form-control" 
     				required>
-    	</td>
-	</tr>
-</table>
-  
-  <input type="submit" value="Register" class="btn btn-primary btn-sm">
-</form>
+</div>
 
+<div class="form-group">
+    <button type="submit" 
+           class="btn btn-primary btn-sm" 
+           value="Register">Register
+    </button>
+</div>
+
+</form>
+</div>
 </div>
 {% endblock %}
