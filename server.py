@@ -68,16 +68,22 @@ def logout():
 
 @app.route("/login", methods = ['POST', 'GET'])
 def login():
-    new_username=request.form.get("username")
-    password=request.form.get("password")
-    current_user = User.query.filter_by(username=new_username).first()
+    #maybe check if method is "POST"
+    if request.method == 'POST':
+        new_username=request.form.get("username")
+        password=request.form.get("password")
+        current_user = User.query.filter_by(username=new_username).first()
 
-    if current_user:
-        if current_user.password == password:
+        if current_user and current_user.password == password:
             session["current_user"] = current_user.user_id
-            return redirect('/my_closet')
-    #flash message here
+
+    current_user = session.get("current_user")
+    if current_user:
+        return redirect('/my_closet')
+
+    # #flash message here
     return render_template("login.html")
+
 
 @app.route("/register", methods = ['POST', 'GET'])
 def register():
@@ -122,10 +128,9 @@ def register_confirm():
                 )
         db.session.add(user)
         db.session.commit()
-
+    session["current_user"] = user.user_id
         #add a flash message
-    return render_template('profile.html',
-                            username=new_username)
+    return redirect('/login')
 
 @app.route("/article_add", methods = ['GET'])
 def article_add():
@@ -150,7 +155,6 @@ def article_add_confirm():
     is_giveaway=request.form.get("is_giveaway")
 
     bool_convert = {"True": True, "False": False}
-    print(image_file_1)
     article = Article(
                 owner_id=user_id,
                 type_id=type_id,
