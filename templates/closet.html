@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2> Closet </h2>
+<h2> {{page_name}} </h2>
 
 <!-- <a href="/article_add">New Article</a> -->
 
@@ -12,7 +12,7 @@
     <a class="nav-link active" href="/article_add">New Article</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link" href="?filter=Dress">Dress</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Link</a>
@@ -28,7 +28,7 @@
 <div class="row">
 
 <!-- for article in request  -->
-{% for item in user_closet %}
+{% for item in closet_info %}
   <div class="col-md-4">
   <div class="shadow p-3 mb-5 bg-white rounded">
     <div class="item-list">

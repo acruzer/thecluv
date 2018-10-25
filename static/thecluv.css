@@ -61,3 +61,7 @@ div.article-detail {
     margin-top: 20px;
     font-weight: lighter;
 }
+
+img.img-thumbnail{
+    width: 200px;   
+}

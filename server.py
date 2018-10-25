@@ -40,17 +40,39 @@ def index():
 @app.route('/my_closet')
 def closet():
     #query articles by session user id
+    filter_type = request.args.get("filter")
+    print(filter_type)
     current_user = session.get("current_user")
+    user_name = User.query.filter_by(user_id=current_user).one()
+    print (user_name.fname)
 
-    user_closet = Article.query.filter_by(owner_id=current_user).all()
+    if user_name.fname.endswith("s"):
+        page_name = "{}' Closet".format(user_name.fname)
+    else:
+        page_name = "{}'s Closet".format(user_name.fname)
 
-    # for item in user_closet: 
-    #     print(item.images)
-    
-    # print(user_closet.size)
-    # print (user_closet_img)
+    closet_info = Article.query.filter_by(owner_id=current_user)
 
-    return render_template("closet.html", user_closet=user_closet)
+    if filter_type:
+        closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
+    closet_info = closet_info.all()
+
+    return render_template("closet.html", closet_info=closet_info, page_name=page_name)
+
+@app.route('/closets')
+def all_closet():
+#     #query articles by session user id
+    current_user = session.get("current_user")
+    page_name = "Closets"
+
+    if current_user:
+        closet_info = Article.query.filter_by(is_private=False).all()
+
+    for item in closet_info: 
+        print(item.images)
+
+
+    return render_template("closet.html", closet_info=closet_info, page_name=page_name)
 
 @app.route('/profile')
 def profile():
