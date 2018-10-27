@@ -2,7 +2,7 @@
 <html>
 <head>
 
-	<title>The Cluv</title>
+	<title>Happy Clothes</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -10,21 +10,22 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 	<link href="static/thecluv.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,700i|Sofia" rel="stylesheet">
 
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="/">
-	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgyZgRZEIdY4flzsu7Q9ovPsgjGi7tsKrRFC5G_vwNmK7qO3p5" width="30" height="30" class="d-inline-block align-top" alt="">
+	<img src="/static/logo_white.png" class="d-inline-block align-top" alt="">
   </a>
-  <a class="navbar-brand" href="/">  The Cluv </a>
+  <!-- <a class="navbar-brand" href="/">  The Cluv </a> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
         <a class="nav-link" href="/my_closet">My Closet <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -32,25 +33,21 @@
       </li>
       	{% if session.get("current_user") %}
       <li class="nav-item">
-      	<a class="nav-link disabled" href="/profile">Profile</a>
+      	<a class="nav-link" href="/profile">Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="/logout">Log out</a>
+        <a class="nav-link" href="/logout">Log out</a>
 		{% else %}
-		<a class="nav-link disabled" href="/login">Login</a>  
+		<a class="nav-link" href="/login">Login</a>  
 		</a>
       </li>
 		{% endif %}
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
 
 
-<hr>
+<br>
 <div class="container">
 
   	{% for msg in get_flashed_messages() %}

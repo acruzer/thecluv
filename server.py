@@ -39,6 +39,9 @@ def index():
 
 @app.route('/my_closet')
 def closet():
+    article_type = ArticleType.query.all()
+    for t in article_type:
+        print(t.name)
     #query articles by session user id
     filter_type = request.args.get("filter")
     print(filter_type)
@@ -57,12 +60,13 @@ def closet():
         closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
     closet_info = closet_info.all()
 
-    return render_template("closet.html", closet_info=closet_info, page_name=page_name)
+    return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
 
 @app.route('/closets')
 def all_closet():
 #     #query articles by session user id
     current_user = session.get("current_user")
+    article_type = ArticleType.query.all()
     page_name = "Closets"
 
     if current_user:
@@ -72,7 +76,7 @@ def all_closet():
         print(item.images)
 
 
-    return render_template("closet.html", closet_info=closet_info, page_name=page_name)
+    return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
 
 @app.route('/profile')
 def profile():

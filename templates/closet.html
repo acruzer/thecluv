@@ -1,25 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2> {{page_name}} </h2>
+<h2></h2>
 
 <!-- <a href="/article_add">New Article</a> -->
 
 <div class="row">
   <div class="col-md-2">
     <ul class="nav flex-column">
+  <div class="side_bar">
   <li class="nav-item">
     <a class="nav-link active" href="/article_add">New Article</a>
   </li>
+  </div>
+  <!-- <div class="side_bar">
   <li class="nav-item">
-    <a class="nav-link" href="?filter=Dress">Dress</a>
+    <a class="nav-link active" href="/my_closet">My Closet</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
+    <a class="nav-link active" href="/closets">Closets</a>
   </li>
+  </div> -->
+  <div class="side_bar">
+  {% for type in article_type %}
   <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
+    <a class="nav-link" href="?filter={{type.name}}">{{type.name}}</a>
   </li>
+  {% endfor %}
+  </div>
 </ul>
 </div>
 

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2> LOGIN </h2>
 
+<h2> LOGIN </h2>
+<img src="/static/logo.png">
 <form action='/login_confirm' method="GET" name='login'>
 <table>
   <tr>
@@ -16,6 +17,5 @@
   <input type="submit" value="login">
 </form>
 <button class="btn btn-primary btn-sm"><a href="/register">New User?</a></button>
-
 
 {% endblock %}

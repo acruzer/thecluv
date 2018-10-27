@@ -1,3 +1,25 @@
+body{
+    background-color: #eaeaed78;
+}
+
+p{
+    color: #011627;
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    color: #011627;
+    /*font-family: 'Open Sans', sans-serif;*/
+}
+
+a:hover {
+    color: #f71735;
+}
+
+.bg-dark {
+    background-color: #65cec0!important;
+}
+
 .h1, h1 {
     font-size: 2.5rem;
     margin: 15px;
@@ -64,4 +86,18 @@ div.article-detail {
 
 img.img-thumbnail{
     width: 200px;   
+}
+
+body.container {
+  background: url(autumn.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+img.d-inline-block.align-top{
+    height: 50px;
+}
+div.side_bar {
+
+    border-top: 1px solid #e5e5e5;
+    position: relative;
 }
