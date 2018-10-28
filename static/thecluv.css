@@ -49,6 +49,20 @@ nav.navbar.navbar-dark.bg-dark {
 	border-color: #182B3A;
 }
 
+.btn-secondary {
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    color: #fff;
+    background-color: #f71735;
+    border-color: #f71735;
+}
+
+.btn-secondary:hover {
+    background-color: #fb4a61;
+    border-color: #fb4a61;
+}
+
 .h2, h2 {
     color: #ff9f1c;
     font-family: 'Sofia', cursive;
@@ -59,6 +73,12 @@ input.btn-primary {
 	width: 150px;
   	text-align: center;
   	margin:0 auto;
+}
+
+input.btn-secondary {
+    width: 150px;
+    text-align: center;
+    margin:0 auto;
 }
 
 input {
