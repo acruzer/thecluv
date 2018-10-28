@@ -1,19 +1,61 @@
 {% extends 'base.html' %}
 {% block content %}
-<div>
-<div class="shadow p-3 mb-5 bg-white rounded">
-<div class="text-center">
-<img src="{{user_info.user_img}}" class="img-thumbnail" alt="{{user_info.user_img}}">
+<div class="container">
+<div class="row">
+<div class="col col-md-2">
+<div class="row justify-content-md-center">
+
+<!-- for article in request  -->
+{% for item in current_article.images %}
+  <div class="item-list">
+  {% if current_article.images %}
+  <div  class="shadow p-3 mb-2 bg-white rounded">
+      <img src="{{item.img_url}}" style="width:100%">
+  </div>
+  {% endif %} 
+  </div>
+{% endfor %}
+
+</div>
+</div>
+  <div class="col col-sm-6">
+    <img src="{{current_article.images[0].img_url}}" style="width:100%">
+  </div>
+  <div class="col col-md-4">
+      <p>
+      <b>item type | </b>{{current_article.type_value.name}}
+      <br>
+      <b>size | </b>{{current_article.size}}
+      <br>
+      <b>material | </b>{{current_article.material}}
+      <br>
+      <b>notes | </b>{{current_article.notes}}
+      </p>
+  {% if current_user == current_article.owner_id %}
+  <button type="submit" 
+         class="btn btn-primary mb-2" 
+         value="edit">Edit
+  </button>
+  <button type="submit" 
+         class="btn btn-primary mb-2" 
+         value="delete">Delete
+  </button>
+  {% endif %}
+  {% if current_article.is_loanable %}
+  <button type="submit" 
+         class="btn btn-primary mb-2" 
+         value="loan">Borrow
+  </button>
+  {% endif %}
+  {% if current_article.is_giveaway %}
+  <button type="submit" 
+         class="btn btn-primary mb-2" 
+         value="free">Free
+  </button>
+  {% endif %}
+
+  </div>
+
 </div>
 
-<h1 class="text-center">{{user_info.fname}} {{user_info.lname}}</h1>
-<p class="text-center">
-<ln class="font-weight-bold">email |</ln>
-{{user_info.email}}
-<br>
-<ln class="font-weight-bold">zipcode |</ln>
-{{user_info.zipcode}}
-</p>
-</div>
-</div>
 {% endblock %}

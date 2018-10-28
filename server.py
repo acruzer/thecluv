@@ -20,7 +20,7 @@ S3_BUCKET = "thecluv"
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
-app.secret_key = "ABC"
+app.secret_key = os.environ["APP_SECRET"]
 
 # Normally, if you use an undefined variable in Jinja2, it fails
 # silently. This is horrible. Fix this so that, instead, it raises an
@@ -77,6 +77,15 @@ def all_closet():
 
 
     return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
+
+@app.route('/article_details/<article_id>')
+def artticle_details(article_id):
+    current_article = Article.query.get(article_id)
+    print(current_article)
+    current_user = session.get("current_user")
+
+    return render_template("article_details.html", current_article=current_article, current_user=current_user)
+    # pass
 
 @app.route('/profile')
 def profile():

@@ -1,5 +1,5 @@
 body{
-    background-color: #eaeaed78;
+    background-color: #eaeaed;
 }
 
 p{
@@ -12,20 +12,30 @@ a {
     /*font-family: 'Open Sans', sans-serif;*/
 }
 
+a.small_link {  
+    font-size: 12px;
+    font-style: italic;
+}
+
 a:hover {
     color: #f71735;
 }
 
-.bg-dark {
+nav.navbar.navbar-dark.bg-dark {
     background-color: #65cec0!important;
 }
 
 .h1, h1 {
+    color: #ff9f1c;
+    font-family: 'Sofia', cursive;
     font-size: 2.5rem;
     margin: 15px;
 }
 
 .btn-primary {
+    width: 150px;
+    height: 30px;
+    padding: 2px;
     color: #fff;
     background-color: #011627;
     border-color: #011627;
@@ -37,6 +47,8 @@ a:hover {
 }
 
 .h2, h2 {
+    color: #ff9f1c;
+    font-family: 'Sofia', cursive;
     text-align: center;
 }
 
@@ -71,6 +83,11 @@ input {
 	flex: 0 0 210px;
 }
 
+div.login_box {
+    margin-top: 20px;
+    background-color: white;
+    padding: 20px;
+}
 
 div.item-list {
     /*border: solid 1px gray;*/
@@ -84,18 +101,26 @@ div.article-detail {
     font-weight: lighter;
 }
 
+img.detail_img {
+    width: 100%;
+}
+
+img.login_logo{
+    margin-top: 20px;
+}
+
 img.img-thumbnail{
     width: 200px;   
 }
 
-body.container {
-  background: url(autumn.jpg) no-repeat center center;
-  background-size: cover;
+body.login_page {
+    background-color: #65cec0;
 }
 
-img.d-inline-block.align-top{
-    height: 50px;
+img.d-inline-block.align-top {
+    height: 50px!important;
 }
+
 div.side_bar {
 
     border-top: 1px solid #e5e5e5;
