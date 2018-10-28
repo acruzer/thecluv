@@ -1,6 +1,9 @@
 body{
     background-color: #eaeaed;
 }
+label.custom-radio .custom-control-input:checked{
+    background-color: #f71735;
+}
 
 p{
     color: #011627;

@@ -48,11 +48,11 @@ def closet():
     current_user = session.get("current_user")
     user_name = User.query.filter_by(user_id=current_user).one()
     print (user_name.fname)
-
-    if user_name.fname.endswith("s"):
-        page_name = "{}' Closet".format(user_name.fname)
-    else:
-        page_name = "{}'s Closet".format(user_name.fname)
+    page_name = "/my_closet"
+    # if user_name.fname.endswith("s"):
+    #     page_name = "{}' Closet".format(user_name.fname)
+    # else:
+    #     page_name = "{}'s Closet".format(user_name.fname)
 
     closet_info = Article.query.filter_by(owner_id=current_user)
 
@@ -67,7 +67,7 @@ def all_closet():
 #     #query articles by session user id
     current_user = session.get("current_user")
     article_type = ArticleType.query.all()
-    page_name = "Closets"
+    page_name = "/closets"
 
     if current_user:
         closet_info = Article.query.filter_by(is_private=False).all()
