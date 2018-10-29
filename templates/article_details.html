@@ -23,6 +23,7 @@
       <img src="{{current_article.images[0].img_url}}" style="width:100%">
     </div>
     <div class="col col-md-4">
+        <p id="article_id">{{current_article.article_id}}</p>
         <p>
         <b>item type | </b>{{current_article.type_value.name}}
         <br>
@@ -44,13 +45,13 @@
            value="delete">Delete
     </button>
     {% endif %}
-    {% if current_article.is_loanable %}
+    {% if current_article.is_loanable and current_article.owner_id != current_user %}
     <button type="submit" 
            class="btn btn-primary mb-2" 
            value="loan">Borrow
     </button>
     {% endif %}
-    {% if current_article.is_giveaway %}
+    {% if current_article.is_giveaway and current_article.owner_id != current_user  %}
     <button type="submit" 
            class="btn btn-primary mb-2" 
            value="free">Free
@@ -78,11 +79,13 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-secondary">Delete</button>
+        <button id="delete_btn" type="button" class="btn btn-secondary">Delete</button>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <!-- jQuery CDN -->
 
@@ -91,5 +94,5 @@
 <!-- Bootstrap Js CDN -->
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<script src="/static/article_details.js"></script>
 {% endblock %}

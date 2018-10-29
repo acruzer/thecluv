@@ -85,7 +85,13 @@ def artticle_details(article_id):
     current_user = session.get("current_user")
 
     return render_template("article_details.html", current_article=current_article, current_user=current_user)
-    # pass
+    
+@app.route('/article_details/<article_id>', methods=['POST'])
+def delete_artticle(article_id):
+    
+    
+
+    return redirect('/my_closet')
 
 @app.route('/profile')
 def profile():
