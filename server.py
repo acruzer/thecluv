@@ -40,14 +40,14 @@ def index():
 @app.route('/my_closet')
 def closet():
     article_type = ArticleType.query.all()
-    for t in article_type:
-        print(t.name)
+    # for t in article_type:
+    #     print(t.name)
     #query articles by session user id
     filter_type = request.args.get("filter")
-    print(filter_type)
+    # print(filter_type)
     current_user = session.get("current_user")
     user_name = User.query.filter_by(user_id=current_user).one()
-    print (user_name.fname)
+    # print (user_name.fname)
     page_name = "/my_closet"
     # if user_name.fname.endswith("s"):
     #     page_name = "{}' Closet".format(user_name.fname)
@@ -72,8 +72,8 @@ def all_closet():
     if current_user:
         closet_info = Article.query.filter_by(is_private=False).all()
 
-    for item in closet_info: 
-        print(item.images)
+    # for item in closet_info: 
+    #     print(item.images)
 
 
     return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
@@ -81,7 +81,7 @@ def all_closet():
 @app.route('/article_details/<article_id>')
 def artticle_details(article_id):
     current_article = Article.query.get(article_id)
-    print(current_article)
+    # print(current_article)
     current_user = session.get("current_user")
 
     return render_template("article_details.html", current_article=current_article, current_user=current_user)
@@ -89,7 +89,10 @@ def artticle_details(article_id):
 @app.route('/article_details/<article_id>', methods=['POST'])
 def delete_artticle(article_id):
     
-    
+    current_user = session.get("current_user")
+    found_article_id = int(request.form.get("article_to_delete"))
+    print(found_article_id)
+
 
     return redirect('/my_closet')
 
@@ -140,7 +143,7 @@ def register_confirm():
     password=request.form.get("password")
     password_2=request.form.get("password_2")
     zipcode=request.form.get("zipcode")
-    print(user_img)
+    # print(user_img)
     #check of user entered a image url, if not set default
 
     if user_img != None:
@@ -180,7 +183,7 @@ def article_add():
 
 @app.route("/article_add_confirm", methods = ['POST'])
 def article_add_confirm():
-    print(request.files)
+    # print(request.files)
     user_id = session["current_user"]
     type_id=request.form.get("type_id")
     image_file_1=request.files.get("image")
@@ -243,7 +246,7 @@ def upload_to_s3(image):
                 "ContentType": image.content_type
                 }
             )
-    print ("https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename))
+    # print ("https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename))
     return "https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename)
 
 if __name__ == "__main__":
