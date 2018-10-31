@@ -93,12 +93,13 @@ def delete_article(article_id):
     found_article_id = int(request.form.get("article_to_delete"))
 
     to_delete = Article.query.filter(Article.article_id == found_article_id).one()
+    print(to_delete.images)
     
     if current_user:
+        delete_img_aws(to_delete)
         db.session.delete(to_delete)
         db.session.commit()
     
-
     return redirect('/my_closet')
 
 @app.route('/profile')
@@ -253,6 +254,22 @@ def upload_to_s3(image):
             )
     # print ("https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename))
     return "https://s3-us-west-1.amazonaws.com/thecluv/{}".format(filename)
+
+def delete_img_aws(article_obj):
+
+    session = boto3.Session(
+    aws_access_key_id=S3_KEY,
+    aws_secret_access_key=S3_SECRET,
+    region_name="us-west-1")
+
+    s3 = session.resource("s3")
+    for i in article_obj.images:
+        img_to_delete = i.img_url[43:]
+        print(img_to_delete)
+        obj = s3.Object(S3_BUCKET, img_to_delete)
+        obj.delete()
+
+        return "Images Deleted"
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the
