@@ -2,6 +2,7 @@
 
 from jinja2 import StrictUndefined
 
+from functools import wraps
 from flask import (Flask, render_template, redirect, request, flash,
                    session)
 
@@ -12,6 +13,15 @@ from model import User, Article, Image, ArticleType, connect_to_db, db
 import boto3, botocore
 import os
 import uuid
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        current_user = session.get("current_user")
+        if current_user is None:
+            return redirect('/login')
+        return f(*args, **kwargs)
+    return decorated_function
 
 S3_KEY = os.environ["S3_KEY"]
 S3_SECRET = os.environ["S3_SECRET"]
@@ -38,21 +48,16 @@ def index():
         return render_template("login.html")
 
 @app.route('/my_closet')
+@login_required
 def closet():
-    article_type = ArticleType.query.all()
-    # for t in article_type:
-    #     print(t.name)
+    current_user = session.get("current_user")
     #query articles by session user id
     filter_type = request.args.get("filter")
-    # print(filter_type)
-    current_user = session.get("current_user")
+    article_type = ArticleType.query.all()
+
     user_name = User.query.filter_by(user_id=current_user).one()
-    # print (user_name.fname)
+
     page_name = "/my_closet"
-    # if user_name.fname.endswith("s"):
-    #     page_name = "{}' Closet".format(user_name.fname)
-    # else:
-    #     page_name = "{}'s Closet".format(user_name.fname)
 
     closet_info = Article.query.filter_by(owner_id=current_user)
 
@@ -63,28 +68,35 @@ def closet():
     return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
 
 @app.route('/closets')
+@login_required
 def all_closet():
-#     #query articles by session user id
+
+    #query articles by session user id
     current_user = session.get("current_user")
+    filter_type = request.args.get("filter")
     article_type = ArticleType.query.all()
     page_name = "/closets"
 
     if current_user:
-        closet_info = Article.query.filter_by(is_private=False).all()
+        closet_info = Article.query.filter_by(is_private=False)
 
-    # for item in closet_info: 
-    #     print(item.images)
-
+    if filter_type:
+        closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
+    closet_info = closet_info.all()
 
     return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
 
 @app.route('/article_details/<article_id>')
-def artticle_details(article_id):
+def article_details(article_id):
     current_article = Article.query.get(article_id)
-    # print(current_article)
+    article_owner = User.query.filter_by(user_id=current_article.owner_id).one()
+    print(article_owner)
     current_user = session.get("current_user")
 
-    return render_template("article_details.html", current_article=current_article, current_user=current_user)
+    return render_template("article_details.html", 
+        current_article=current_article, 
+        current_user=current_user, 
+        article_owner=article_owner)
     
 @app.route('/article_details/<article_id>', methods=['POST'])
 def delete_article(article_id):
@@ -149,7 +161,7 @@ def register_confirm():
     password=request.form.get("password")
     password_2=request.form.get("password_2")
     zipcode=request.form.get("zipcode")
-    # print(user_img)
+
     #check of user entered a image url, if not set default
 
     if user_img != None:
@@ -186,6 +198,15 @@ def register_confirm():
 def article_add():
     article_type = ArticleType.query.all()
     return render_template("article_add.html", article_type=article_type)
+
+@app.route("/article_edit", methods = ['GET', 'POST'])
+def article_edit():
+    current_user = session.get("current_user")
+    edit_article_id = int(request.form.get("article_to_edit"))
+    print(edit_article_id)
+    # print(article_id)
+    return render_template("article_edit.html", current_article=edit_article_id)
+
 
 @app.route("/article_add_confirm", methods = ['POST'])
 def article_add_confirm():
@@ -270,6 +291,7 @@ def delete_img_aws(article_obj):
         obj.delete()
 
         return "Images Deleted"
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the

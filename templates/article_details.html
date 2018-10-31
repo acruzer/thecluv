@@ -11,7 +11,7 @@
         <div class="item-list">
         {% if current_article.images %}
           <div  class="shadow p-3 mb-2 bg-white rounded">
-              <img src="{{item.img_url}}" style="width:100%">
+              <img class="thumbnail_img" src="{{item.img_url}}" style="width:100%">
           </div>
         {% endif %} 
         </div>
@@ -20,10 +20,10 @@
     </div> <!-- closes col col-md-2 -->
   </div> <!-- row closes -->
     <div class="col col-sm-6">
-      <img src="{{current_article.images[0].img_url}}" style="width:100%">
+      <img id="img_lrg" src="{{current_article.images[0].img_url}}" style="width:100%">
     </div>
     <div class="col col-md-4">
-        <p id="article_id">{{current_article.article_id}}</p>
+        <p hidden id="article_id">{{current_article.article_id}}</p>
         <p>
         <b>item type | </b>{{current_article.type_value.name}}
         <br>
@@ -35,9 +35,12 @@
         </p>
     {% if current_user == current_article.owner_id %}
     <button type="submit" 
-           class="btn btn-primary mb-2" 
-           value="edit">Edit
+            id="edit_btn"
+            class="btn btn-primary mb-2" 
+            name="edit"
+            value="edit">Edit
     </button>
+    
     <button type="submit" 
            class="btn btn-primary mb-2" 
            data-toggle="modal" 
@@ -46,16 +49,22 @@
     </button>
     {% endif %}
     {% if current_article.is_loanable and current_article.owner_id != current_user %}
+    <form method="post" action="mailto:{{article_owner.email}}" >
+    
     <button type="submit" 
            class="btn btn-primary mb-2" 
            value="loan">Borrow
-    </button>
+    </button> 
+    </form>
     {% endif %}
     {% if current_article.is_giveaway and current_article.owner_id != current_user  %}
+     <form method="post" action="mailto:{{article_owner.email}}" >
+    
     <button type="submit" 
            class="btn btn-primary mb-2" 
-           value="free">Free
-    </button>
+           value="loan">Free
+    </button> 
+    </form>
     {% endif %}
 
     </div>

@@ -10,6 +10,23 @@ $('#delete_btn').on('click', function(evt){
 $.post(route_url, to_delete, function (data) {window.location="/my_closet"});
 });
 
+$('#edit_btn').on('click', function(evt){
+	let current_article_id = $('#article_id').html()
+	alert(current_article_id)
+	to_edit = {
+		"article_to_edit" : current_article_id
+	}
+
+$.get(route_url, to_edit, function (data) {window.location="/article_edit"});
+});
+
+$('.thumbnail_img').hover(function(evt){
+	// alert("HI")
+	console.log(evt)
+	console.log(evt.currentTarget.src)
+	$('#img_lrg').attr("src", evt.currentTarget.src);
+
+});
 
 // const delete_btn = document.querySelector('#delete_btn');
 

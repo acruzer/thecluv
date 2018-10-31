@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id= class="col-6"><h2> New Article </h2></div>
+<div id= class="col-6"><h2> Edit Article </h2></div>
 <div class="row justify-content-md-center">
 <div class="col col-lg-8">
 <div class="login_box shadow rounded">
@@ -10,31 +10,11 @@
 	<div class="form-group">
 	<label for="type">Type</label>
     	<select name = "type_id" class="custom-select">
-    	<option selected>Choose One</option>
+    	<option selected>{{current_article.type.name}}</option>
     	{% for type in article_type %}
     	<option value="{{type.type_id}}">{{type.name}}</option>
     	{% endfor %}
     	</select>
-	</div>
-
-	<div class="form-group">
-    <label for="images">Images</label>
-		<input type="file" 
-			   name="image"
-			   class="form-control-file" 
-		       required>
-    <br>
-		<input type="file" 
-			   name="image_2"
-			   class="form-control-file">
-    <br>
-		<input type="file" 
-			   name="image_3"
-			   class="form-control-file">
-    <br>     
-		<input type="file" 
-			   name="image_4"
-			   class="form-control-file">
 	</div>
     
     <div class="form-group">	
@@ -42,6 +22,7 @@
 		<input type="size" 
     		   name="size"
     		   class="form-control" 
+           value="{{current_article.size}}"
     		   required>
 	</div>
 
@@ -50,6 +31,7 @@
 		<input type="text" 
     		   name="color"
     		   class="form-control"
+           value="{{current_article.color}}"
     		   required>
     </div>		   
 
@@ -58,15 +40,17 @@
 		<input type="material" 
     		   name="material"
     		   class="form-control"
+           value="{{current_article.material}}"
     		   required>
     </div>
 
 	<div class="form-group">
     <label for="notes">Notes</label>
 		<textarea class="form-control"
-			   id="exampleFormControlTextarea1" 
-			   rows="3" 
-    		   name="notes">
+			        id="exampleFormControlTextarea1"
+              rows="3"
+              name="notes"
+              value="{{current_article.notes}}">
 		</textarea>
 	</div>
 
