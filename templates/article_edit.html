@@ -5,12 +5,12 @@
 <div class="col col-lg-8">
 <div class="login_box shadow rounded">
 
-<form action="/article_add_confirm" enctype="multipart/form-data" method="POST" name="article_add">
+<form action="/article_edit/{{current_article.article_id}}" enctype="multipart/form-data" method='POST' name="article_edit">
   
 	<div class="form-group">
 	<label for="type">Type</label>
     	<select name = "type_id" class="custom-select">
-    	<option selected>{{current_article.type.name}}</option>
+    	<option selected>{{current_article.type_value.name}}</option>
     	{% for type in article_type %}
     	<option value="{{type.type_id}}">{{type.name}}</option>
     	{% endfor %}
@@ -49,9 +49,7 @@
 		<textarea class="form-control"
 			        id="exampleFormControlTextarea1"
               rows="3"
-              name="notes"
-              value="{{current_article.notes}}">
-		</textarea>
+              name="notes">{{current_article.notes}}</textarea>
 	</div>
 
 
@@ -63,7 +61,10 @@
            name="is_private" 
            class="custom-control-input"
            value="True"
-           checked>
+           {% if current_article.is_private == True %}
+           checked
+           {% endif %}
+           >
            <label class="custom-control-label" for="private_yes">Yes</label>
 		  </div>
 
@@ -72,7 +73,11 @@
   			   id="private_no" 
   			   name="is_private" 
   			   class="custom-control-input"
-  			   value="False">
+  			   value="False"
+           {% if current_article.is_private == False %}
+           checked
+           {% endif %}
+           >
   			   <label class="custom-control-label" for="private_no">No</label>
 		  </div>
 	</div>
@@ -84,7 +89,11 @@
   			   id="lonable_yes" 
   			   name="is_loanable" 
   			   class="custom-control-input"
-  			   value="True">
+  			   value="True"
+           {% if current_article.is_loanable == True %}
+           checked
+           {% endif %}
+           >
   			   <label class="custom-control-label" for="lonable_yes">Yes</label>
 		  </div>
 		
@@ -95,7 +104,10 @@
   			   name="is_loanable" 
   			   class="custom-control-input"
   			   value="False"
-           checked>
+           {% if current_article.is_loanable == False %}
+           checked
+           {% endif %}
+           >
   			   <label class="custom-control-label" for="lonable_no">No</label>
 		  </div>
 	</div>
@@ -107,7 +119,11 @@
   			   id="giveaway_yes" 
   			   name="is_giveaway" 
   			   class="custom-control-input"
-  			   value="True">
+           value="True"
+           {% if current_article.is_giveaway == True %}
+           checked
+           {% endif %}
+           >
   			   <label class="custom-control-label" for="giveaway_yes">Yes</label>
 		  </div>
 
@@ -117,7 +133,10 @@
   			   name="is_giveaway" 
   			   class="custom-control-input"
   			   value="False"
-           checked>
+           {% if current_article.is_giveaway == False %}
+           checked
+           {% endif %}
+           >
   			   <label class="custom-control-label" for="giveaway_no">No</label>
 		  </div>
 	</div>

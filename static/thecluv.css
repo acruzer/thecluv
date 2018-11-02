@@ -5,6 +5,10 @@ label.custom-radio .custom-control-input:checked{
     background-color: #f71735;
 }
 
+input.form-control {
+    text-align: left;
+}
+
 footer {
     /*position: fixed;*/
     bottom: 0;

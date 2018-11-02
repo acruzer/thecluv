@@ -34,12 +34,14 @@
         <b>notes | </b>{{current_article.notes}}
         </p>
     {% if current_user == current_article.owner_id %}
+    <form method="get" action="/article_edit/{{current_article.article_id}}">
     <button type="submit" 
             id="edit_btn"
             class="btn btn-primary mb-2" 
             name="edit"
             value="edit">Edit
     </button>
+    </form>
     
     <button type="submit" 
            class="btn btn-primary mb-2" 
