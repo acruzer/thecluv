@@ -63,6 +63,7 @@ def closet():
 
 	if filter_type:
 		closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
+	
 	closet_info = closet_info.all()
 
 	return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
@@ -90,12 +91,13 @@ def all_closet():
 def article_details(article_id):
 	current_article = Article.query.get(article_id)
 	article_owner = User.query.filter_by(user_id=current_article.owner_id).one()
-	print(article_owner)
-	current_user = session.get("current_user")
 
+	current_user = session.get("current_user")
+	current_user_info = User.query.filter_by(user_id=current_user).first()
 	return render_template("article_details.html", 
 		current_article=current_article, 
-		current_user=current_user, 
+		current_user=current_user,
+		current_user_info=current_user_info, 
 		article_owner=article_owner)
 	
 @app.route('/article_details/<article_id>', methods=['POST'])
@@ -127,11 +129,28 @@ def profile():
 def profile_edit():
 	# Edit User info
 	current_user = session.get("current_user")
-
 	user_info = User.query.filter_by(user_id=current_user).first()
+	# print(user_info)
 
 	if request.method == 'GET':
 		return render_template("profile_edit.html", user_info=user_info)
+
+	if request.method == 'POST':
+		new_email=request.form.get("email")
+		user_info.fname = request.form.get("fname")
+		user_info.lname = request.form.get("lname")
+		user_info.zipcode = request.form.get("zipcode")
+		if new_email != user_info.email:
+			email_check = User.query.filter_by(email=new_email).first()
+			if email_check:
+				flash('This email already exist.')
+				return redirect('/profile_edit')
+			else: 
+				user_info.email = new_email
+				db.session.commit()
+		
+		return render_template("profile.html", user_info=user_info)
+
 
 @app.route('/logout')
 def logout():
@@ -148,12 +167,16 @@ def login():
 
 		if current_user and current_user.password == password:
 			session["current_user"] = current_user.user_id
-
+		else:
+			flash('Either you username or password are incorrect. Please try again.')
+	
 	current_user = session.get("current_user")
 	if current_user:
 		return redirect('/my_closet')
 
 	# #flash message here
+	
+	
 	return render_template("login.html")
 
 
@@ -181,11 +204,14 @@ def register_confirm():
 		user_pic = "https://t4.ftcdn.net/jpg/00/97/00/07/160_F_97000700_0UiUzwGrOuZuNRBSuH3aZMB5w1j9K0iA.jpg"
 
 	if password_2 != password:
+		flash('Your passwords do not match.')
 		return redirect('/register')
 	#check if email in Users
 	if User.query.filter_by(email=new_email).first():
+		flash('The email you entered already exist.')
 		return redirect('/login')
 	if User.query.filter_by(username=new_username).first():
+		flash('The username you entered already exist.')
 		return redirect('/register')
 	else:   
 		pwd = request.form.get('password')
@@ -201,7 +227,7 @@ def register_confirm():
 		db.session.add(user)
 		db.session.commit()
 	session["current_user"] = user.user_id
-		#add a flash message
+	flash('Welcome!!!')
 	return redirect('/login')
 
 @app.route("/article_add", methods = ['GET'])

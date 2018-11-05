@@ -17,6 +17,19 @@
 <div class="text-center">
 	<img class="login_logo" src="static/logo_white.png">
 </div>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+
+        {% for message in messages %}
+    <div class="alert alert-secondary" role="alert">
+    {{ message }}
+    </div>
+        {% endfor %}
+
+  {% endif %}
+{% endwith %}
+
 {% block content %} put your content here {% endblock %}
 <footer>
 <br>
