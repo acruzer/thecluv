@@ -1,5 +1,8 @@
 body{
     background-color: #eaeaed;
+    min-height: 400px;
+    margin-bottom: 100px;
+    clear: both
 }
 label.custom-radio .custom-control-input:checked{
     background-color: #f71735;
@@ -9,10 +12,37 @@ input.form-control {
     text-align: left;
 }
 
-footer {
-    /*position: fixed;*/
+label.custom-select option:hover
+{
+  color: #fff;
+  background-color: #b91773;
+  border-color: #fff;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+    color: #fff;
+    background-color: #007bff;
+}
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color: #ff9f1c;
+}
+
+footer{
+    padding-top: 30px;
+    position:inherit;
+    bottom:0;
+    height: 70px; 
+    bottom: 0;
+    width: 100%
+}
+
+footer#internal {
+    position:fixed;
+    bottom:0;
+    height: 70px; 
     bottom: 0;
     width: 100%;
+    background-color: #011627
 }
 
 p{
@@ -35,6 +65,15 @@ p.small_text {
     font-size: 12px;
     font-style: italic;
     text-align: center;
+}
+
+p.small_text_white {  
+    font-family: sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    text-align: center;
+    color: white;
+    margin: auto
 }
 
 a:hover {
@@ -139,6 +178,11 @@ div.item-list {
 div.article-detail {
     margin-top: 20px;
     font-weight: lighter;
+}
+
+img.img-responsive {
+  max-width: 90%;
+  max-height: auto;
 }
 
 img.detail_img {

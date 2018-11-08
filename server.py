@@ -88,6 +88,7 @@ def all_closet():
 	return render_template("closet.html", closet_info=closet_info, page_name=page_name, article_type=article_type)
 
 @app.route('/article_details/<article_id>')
+@login_required
 def article_details(article_id):
 	current_article = Article.query.get(article_id)
 	article_owner = User.query.filter_by(user_id=current_article.owner_id).one()
@@ -101,6 +102,7 @@ def article_details(article_id):
 		article_owner=article_owner)
 	
 @app.route('/article_details/<article_id>', methods=['POST'])
+@login_required
 def delete_article(article_id):
 	
 	current_user = session.get("current_user")
@@ -117,6 +119,7 @@ def delete_article(article_id):
 	return redirect('/my_closet')
 
 @app.route('/profile')
+@login_required
 def profile():
 	#User profile page.
 	current_user = session.get("current_user")
@@ -126,6 +129,7 @@ def profile():
 
 
 @app.route('/profile_edit', methods=['POST', 'GET'])
+@login_required
 def profile_edit():
 	# Edit User info
 	current_user = session.get("current_user")
@@ -155,6 +159,7 @@ def profile_edit():
 @app.route('/logout')
 def logout():
 	session.clear()
+	# flash('You are now logged out.')
 	return redirect('/login')
 
 @app.route("/login", methods = ['POST', 'GET'])
@@ -173,8 +178,6 @@ def login():
 	current_user = session.get("current_user")
 	if current_user:
 		return redirect('/my_closet')
-
-	# #flash message here
 	
 	
 	return render_template("login.html")
@@ -231,12 +234,14 @@ def register_confirm():
 	return redirect('/login')
 
 @app.route("/article_add", methods = ['GET'])
+@login_required
 def article_add():
 	article_type = ArticleType.query.all()
 	
 	return render_template("article_add.html", article_type=article_type)
 
 @app.route("/article_edit/<article_id>", methods = ['GET', 'POST'])
+@login_required
 def article_edit(article_id):
 	current_user = session.get("current_user")
 	current_article = Article.query.filter_by(article_id=article_id).first()
@@ -258,10 +263,11 @@ def article_edit(article_id):
 		current_article.is_giveaway = bool(is_giveaway)
 
 		db.session.commit()
-		
+		flash('This article has been updated.')
 		return render_template("article_details.html", current_article=current_article, current_user=current_user)
 
 @app.route("/article_add_confirm", methods = ['POST'])
+@login_required
 def article_add_confirm():
 	# print(request.files)
 	user_id = session["current_user"]
@@ -307,6 +313,8 @@ def article_add_confirm():
 	
 	db.session.add(article)
 	db.session.commit()
+	
+	flash('New article added.')
 	return redirect('/my_closet')
 
 def upload_to_s3(image):

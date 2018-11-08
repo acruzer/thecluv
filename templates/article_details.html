@@ -1,16 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
   <div class="row">
-    <div class="col col-md-2">
+    <div class="col col-2 col-md-2">
       <div class="row justify-content-md-center">
 
       <!-- for article in request  -->
       {% for item in current_article.images %}
         <div class="item-list">
         {% if current_article.images %}
-          <div  class="shadow p-3 mb-2 bg-white rounded">
+          <div  class="shadow p-1 mb-2 bg-white rounded">
               <img class="thumbnail_img" src="{{item.img_url}}" style="width:100%">
           </div>
         {% endif %} 
@@ -19,10 +18,12 @@
 
     </div> <!-- closes col col-md-2 -->
   </div> <!-- row closes -->
-    <div class="col col-sm-6">
+    <div class="col col-10 col-md-6">
+    <div  class="shadow p-1 mb-2 bg-white rounded">
       <img id="img_lrg" src="{{current_article.images[0].img_url}}" style="width:100%">
     </div>
-    <div class="col col-md-4">
+    </div>
+    <div class="col col-10 offset-2 offset-md-0 col-md-4 pt-3">
         <p hidden id="article_id">{{current_article.article_id}}</p>
         <p>
         <b>item type | </b>{{current_article.type_value.name}}
@@ -100,7 +101,6 @@
       </div>
     </div>
   </div>
-</div>
 
 
 
