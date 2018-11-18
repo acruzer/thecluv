@@ -80,7 +80,7 @@ def all_closet():
 	page_name = "/closets"
 
 	if current_user:
-		closet_info = Article.query.filter(Article.owner_id!=1, Article.is_private==False)
+		closet_info = Article.query.filter(Article.owner_id!=current_user, Article.is_private==False)
 
 	if filter_type:
 		closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
