@@ -74,12 +74,13 @@ def all_closet():
 
 	#query articles by session user id
 	current_user = session.get("current_user")
+	print(current_user)
 	filter_type = request.args.get("filter")
 	article_type = ArticleType.query.all()
 	page_name = "/closets"
 
 	if current_user:
-		closet_info = Article.query.filter_by(is_private=False)
+		closet_info = Article.query.filter(Article.owner_id!=1, Article.is_private==False)
 
 	if filter_type:
 		closet_info = closet_info.join(ArticleType).filter(ArticleType.name==filter_type)
@@ -360,7 +361,7 @@ def delete_img_aws(article_obj):
 if __name__ == "__main__":
 	# We have to set debug=True here, since it has to be True at the
 	# point that we invoke the DebugToolbarExtension
-	app.debug = False
+	app.debug = True
 	# DEBUG_TB_INTERCEPT_REDIRECTS = False
 	# make sure templates, etc. are not cached in debug mode
 	app.jinja_env.auto_reload = app.debug
