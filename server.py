@@ -258,9 +258,12 @@ def article_edit(article_id):
 		current_article.color = request.form.get("color")
 		current_article.material = request.form.get("material")
 		current_article.notes = request.form.get("notes")
-		current_article.is_private = bool(is_private)
-		current_article.is_loanable = bool(is_loanable)
-		current_article.is_giveaway = bool(is_giveaway)
+
+		bool_convert = {"True": True, "False": False}
+		
+		current_article.is_private = bool_convert[is_private]
+		current_article.is_loanable = bool_convert[is_loanable]
+		current_article.is_giveaway = bool_convert[is_giveaway]
 
 		db.session.commit()
 		flash('This article has been updated.')
@@ -357,7 +360,7 @@ def delete_img_aws(article_obj):
 if __name__ == "__main__":
 	# We have to set debug=True here, since it has to be True at the
 	# point that we invoke the DebugToolbarExtension
-	app.debug = True
+	app.debug = False
 	# DEBUG_TB_INTERCEPT_REDIRECTS = False
 	# make sure templates, etc. are not cached in debug mode
 	app.jinja_env.auto_reload = app.debug
